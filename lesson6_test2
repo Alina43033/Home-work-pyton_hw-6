@@ -1,16 +1,16 @@
-service = ChromeService(ChromeDriverManager().install())
-driver = webdriver.Chrome(service = service)
-driver.implicitly_wait(10)
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
+driver.maximize_window()
 driver.get('http://uitestingplayground.com/textinput')
-field = driver.find_element(By.CSS_SELECTOR, '#newButtonName')
-field.send_keys("SkyPro")
 
-driver.find_element(By.CSS_SELECTOR, "#updatingButton").click()
-
-wait = WebDriverWait(driver, 20)
-content = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#updatingButton")))
-txt = content.text
+input = driver.find_element(By.CSS_SELECTOR, '#newButtonName')
+input.send_keys('SkyPro')
+click = driver.find_element(By.CSS_SELECTOR, '#updatingButton').click()
+txt = driver.find_element(By.CSS_SELECTOR, '#updatingButton').text
 print(txt)
 
-driver.quit()
+driver.quit
