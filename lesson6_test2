@@ -9,7 +9,7 @@ driver.get('http://uitestingplayground.com/textinput')
 
 input = driver.find_element(By.CSS_SELECTOR, '#newButtonName')
 input.send_keys('SkyPro')
-click = driver.find_element(By.CSS_SELECTOR, '#updatingButton').click()
+driver.find_element(By.CSS_SELECTOR, '#updatingButton')
 txt = driver.find_element(By.CSS_SELECTOR, '#updatingButton').text
 print(txt)
 
