@@ -7,12 +7,15 @@ from selenium.webdriver.support import expected_conditions as EC
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
-driver.maximize_window()
-driver.get('http://uitestingplayground.com/ajax')
+driver.get("http://uitestingplayground.com/ajax")
 
-driver.find_element(By.CSS_SELECTOR, '#ajaxButton').click()
+button = driver.find_element(By.XPATH, '//button[contains(@class, "btn btn-primary")]')
+button.click()
 
-
-txt = (driver.find_element(By.CSS_SELECTOR, 'p.bg-success').text)
-
+ajax = WebDriverWait(driver, 20).until(
+    EC.presence_of_element_located((By.CSS_SELECTOR, "p[class='bg-success']"))
+)
+txt = ajax.text
 print(txt)
+
+driver.quit()
